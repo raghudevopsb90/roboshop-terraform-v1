@@ -13,7 +13,8 @@ resource "aws_instance" "databases" {
 }
 
 resource "aws_instance" "applications" {
-  for_each = local.applications
+  for_each    = local.applications
+  depends_on  = [aws_instance.databases, null_resource.databases]
 
   ami                         = var.ami_id
   instance_type               = var.instance_type
