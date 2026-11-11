@@ -46,6 +46,7 @@ resource "null_resource" "applications" {
     inline = [
       "sudo dnf install python3.14-pip -y",
       "sudo pip3.14 install ansible",
+      "echo ansible-pull -i localhost, -e ansible_user=${var.ansible_user} -e ansible_password='${var.ansible_password}' -U https://github.com/raghudevopsb90/roboshop-ansible-v4-with-opencode.git roboshop.yml -e component_name=${each.key} >/home/ec2-user/ac",
       "ansible-pull -i localhost, -e ansible_user=${var.ansible_user} -e ansible_password='${var.ansible_password}' -U https://github.com/raghudevopsb90/roboshop-ansible-v4-with-opencode.git roboshop.yml -e component_name=${each.key}",
     ]
   }
